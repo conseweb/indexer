@@ -190,5 +190,6 @@ func ListView(ctx *RequestContext, orm *xorm.Engine, params martini.Params) {
 		ctx.Error(500, err)
 		return
 	}
-	_ = files
+
+	ctx.rnd.HTML(200, "index", files)
 }

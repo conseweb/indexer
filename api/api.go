@@ -10,7 +10,6 @@ import (
 	"time"
 
 	log "github.com/Sirupsen/logrus"
-	"github.com/conseweb/indexer"
 	"github.com/go-martini/martini"
 	"github.com/martini-contrib/cors"
 	"github.com/martini-contrib/render"
@@ -79,7 +78,7 @@ func Serve(listenAddr string) error {
 	}))
 
 	m.Use(requextCtx)
-	m.Get("/", SetIndexerDBMW, ListView)
+	m.Get("/ls", SetIndexerDBMW, ListView)
 	m.Group(API_PREFIX, func(r martini.Router) {
 		r.Group("/indexer", func(r martini.Router) {
 			r.Get("/devices/:device_id", GetDeviceIndexer)
@@ -107,7 +106,17 @@ func NewMartini() *martini.ClassicMartini {
 	r := martini.NewRouter()
 	m := martini.New()
 	m.Use(martini.Recovery())
-	m.Use(render.Renderer())
+	m.Use(render.Renderer(render.Options{
+		Directory: "api/templates",
+		// Layout:          "layout",
+		Extensions:      []string{".tmpl", ".html"},
+		Delims:          render.Delims{"{{", "}}"},
+		Charset:         "UTF-8",
+		HTMLContentType: "application/xhtml+xml",
+		// IndentJSON:      true,
+		// IndentXML:       true,
+		// Funcs:           []template.FuncMap{AppHelpers},
+	}))
 	m.MapTo(r, (*martini.Routes)(nil))
 	m.Action(r.Handle)
 	return &martini.ClassicMartini{Martini: m, Router: r}
@@ -119,7 +128,6 @@ func requextCtx(w http.ResponseWriter, req *http.Request, mc martini.Context, rn
 		req:    req,
 		mc:     mc,
 		rnd:    rnd,
-		db:     indexer.GetDB(),
 		params: make(map[string]string),
 	}
 
