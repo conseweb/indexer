@@ -95,6 +95,24 @@ func testData(o *xorm.Engine) {
 			Hash:     "3456",
 			Size:     1234,
 		},
+		&FileInfo{
+			DeviceID: "bbbbbbbb",
+			Path:     "/a",
+			Hash:     "1234",
+			Size:     1234,
+		},
+		&FileInfo{
+			DeviceID: "bbbbbbbb",
+			Path:     "/b",
+			Hash:     "2345",
+			Size:     1234,
+		},
+		&FileInfo{
+			DeviceID: "cccccccc",
+			Path:     "/c",
+			Hash:     "3456",
+			Size:     1234,
+		},
 	}
 
 	bs, _ := json.Marshal(d)
