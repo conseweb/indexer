@@ -79,7 +79,7 @@ func Serve(listenAddr string) error {
 	}))
 
 	m.Use(requextCtx)
-
+	m.Get("/", SetIndexerDBMW, ListView)
 	m.Group(API_PREFIX, func(r martini.Router) {
 		r.Group("/indexer", func(r martini.Router) {
 			r.Get("/devices/:device_id", GetDeviceIndexer)

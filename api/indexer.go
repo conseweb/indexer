@@ -182,3 +182,13 @@ func OfflineDevice(ctx *RequestContext, orm *xorm.Engine, params martini.Params)
 
 	ctx.Message(200, "ok")
 }
+
+func ListView(ctx *RequestContext, orm *xorm.Engine, params martini.Params) {
+	files := []*indexer.FileInfo{}
+	err := orm.OrderBy("updated").Find(&files)
+	if err != nil {
+		ctx.Error(500, err)
+		return
+	}
+	_ = files
+}

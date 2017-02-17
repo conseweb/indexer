@@ -1,10 +1,12 @@
 package indexer
 
 import (
+	"fmt"
 	"testing"
 )
 
 func TestCompare(t *testing.T) {
+
 	var comp struct {
 		loc, rem []*FileInfo
 	}
