@@ -1,6 +1,7 @@
 package indexer
 
 import (
+	"encoding/json"
 	"path/filepath"
 
 	"github.com/Sirupsen/logrus"
@@ -66,6 +67,39 @@ func InitDB() (*xorm.Engine, error) {
 	Orm.Sync2(&FileInfo{}, &Device{})
 
 	orm = Orm
-
+	testData(orm)
 	return Orm, nil
+}
+
+func testData(o *xorm.Engine) {
+	d := []interface{}{
+		&Device{"aaaaaaaa", "127.0.0.1:1234"},
+		&Device{"bbbbbbbb", "127.0.0.2:1234"},
+		&Device{"cccccccc", "127.0.0.3:1234"},
+
+		&FileInfo{
+			DeviceID: "aaaaaaaa",
+			Path:     "/a",
+			Hash:     "1234",
+			Size:     1234,
+		},
+		&FileInfo{
+			DeviceID: "aaaaaaaa",
+			Path:     "/b",
+			Hash:     "2345",
+			Size:     1234,
+		},
+		&FileInfo{
+			DeviceID: "aaaaaaaa",
+			Path:     "/c",
+			Hash:     "3456",
+			Size:     1234,
+		},
+	}
+
+	bs, _ := json.Marshal(d)
+	logrus.Infof("body: %s", string(bs))
+
+	n, err := o.Insert(d...)
+	logrus.Infof("insert %v, %v", n, err)
 }

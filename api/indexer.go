@@ -3,6 +3,7 @@ package api
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/Sirupsen/logrus"
 	"strconv"
 
 	"github.com/conseweb/indexer"
@@ -190,6 +191,9 @@ func ListView(ctx *RequestContext, orm *xorm.Engine, params martini.Params) {
 		ctx.Error(500, err)
 		return
 	}
+	for _, file := range files {
+		logrus.Infof("index; %+v", file)
+	}
 
-	ctx.rnd.HTML(200, "index", files)
+	ctx.rnd.HTML(200, "index", map[string][]*indexer.FileInfo{"Files": files})
 }

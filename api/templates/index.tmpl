@@ -1,9 +1,28 @@
 <!-- templates/layout.tmpl -->
 <html>
   <head>
-    <title>Martini Plz</title>
+    <title>Indexer</title>
   </head>
   <body>
-    This is the {{ .current }} page.
+    <h1>Indexer</h1>
+    <table>
+      <thead>
+      <tr>
+      	<td>#</td>
+      	<td>设备ID</td>
+      	<td>文件路径</td>
+      	<td>文件大小</td>
+      </tr>
+      </thead>
+      <tbody>
+      	{{range $index, $file := .Files}}
+      	<tr>
+      		<td>{{$index}}</td>
+      		<td>{{$file.DeviceID}}</td>
+      		<td>{{$file.Path}}</td>
+      		<td>{{$file.Size}}</td>
+      	</tr>{{end}}
+      </tbody>
+    </table>
   </body>
 </html>

@@ -23,7 +23,7 @@ var (
 )
 
 type Device struct {
-	ID      string `xorm:"pk" json:"id"`
+	ID      string `xorm:"pk 'id'" json:"id"`
 	Address string `xorm:"notnull index" json:"address"`
 }
 

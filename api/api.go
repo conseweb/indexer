@@ -78,7 +78,7 @@ func Serve(listenAddr string) error {
 	}))
 
 	m.Use(requextCtx)
-	m.Get("/ls", SetIndexerDBMW, ListView)
+	m.Get("/", SetIndexerDBMW, ListView)
 	m.Group(API_PREFIX, func(r martini.Router) {
 		r.Group("/indexer", func(r martini.Router) {
 			r.Get("/devices/:device_id", GetDeviceIndexer)
@@ -112,7 +112,7 @@ func NewMartini() *martini.ClassicMartini {
 		Extensions:      []string{".tmpl", ".html"},
 		Delims:          render.Delims{"{{", "}}"},
 		Charset:         "UTF-8",
-		HTMLContentType: "application/xhtml+xml",
+		HTMLContentType: "text/html",
 		// IndentJSON:      true,
 		// IndentXML:       true,
 		// Funcs:           []template.FuncMap{AppHelpers},
