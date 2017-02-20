@@ -14,4 +14,5 @@ func SetIndexerDBMW(ctx *RequestContext, mc martini.Context) {
 		return
 	}
 	mc.Map(orm)
+	ctx.mc.Next()
 }

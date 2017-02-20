@@ -6,6 +6,7 @@ import (
 )
 
 func main() {
+	logrus.SetLevel(logrus.DebugLevel)
 	err := api.Serve(":8080")
 	if err != nil {
 		logrus.Error(err)

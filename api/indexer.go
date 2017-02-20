@@ -52,11 +52,26 @@ func GetFileAddr(ctx *RequestContext, orm *xorm.Engine, params martini.Params) {
 	ctx.rnd.JSON(200, FileWrapper{file, devs[0].Address})
 }
 
+// GetDeviceIndexer GET /indexer/devices
+func GetDevices(ctx *RequestContext, orm *xorm.Engine, params martini.Params) {
+	rets := []*indexer.Device{}
+
+	err := orm.Find(&rets)
+	if err != nil {
+		ctx.Error(500, err)
+		return
+	}
+
+	ctx.rnd.JSON(200, rets)
+}
+
 // GetDeviceIndexer GET /indexer/devices/:device_id
 func GetDeviceIndexer(ctx *RequestContext, orm *xorm.Engine, params martini.Params) {
 	devID := params["device_id"]
 	files := []*indexer.FileInfo{}
-	err := orm.Where("device_id", devID).Find(&files)
+	logrus.Debugf("GetDeviceIndexer device_id: %s", devID)
+
+	err := orm.Where("device_id = ?", devID).Find(&files)
 	if err != nil {
 		ctx.Error(500, err)
 		return

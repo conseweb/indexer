@@ -16,7 +16,7 @@ type FileInfo struct {
 	DeviceID string `xorm:"notnull index 'device_id'" json:"device_id"`
 	Path     string `xorm:"notnull index 'path'" json:"path"`
 	Hash     string `xorm:"notnull index 'hash'" json:"hash"`
-	Size     int64  `xorm:"'size'" json:"hash"`
+	Size     int64  `xorm:"'size'" json:"size"`
 
 	Created time.Time `xorm:"created" json:"created"`
 	Updated time.Time `xorm:"updated" json:"updated"`

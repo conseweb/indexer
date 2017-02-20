@@ -25,6 +25,7 @@ var (
 type Device struct {
 	ID      string `xorm:"pk 'id'" json:"id"`
 	Address string `xorm:"notnull index" json:"address"`
+	Online  bool   `xorm:"'online'" json:"online"`
 }
 
 type Indexer struct {

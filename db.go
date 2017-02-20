@@ -73,9 +73,9 @@ func InitDB() (*xorm.Engine, error) {
 
 func testData(o *xorm.Engine) {
 	d := []interface{}{
-		&Device{"aaaaaaaa", "127.0.0.1:1234"},
-		&Device{"bbbbbbbb", "127.0.0.2:1234"},
-		&Device{"cccccccc", "127.0.0.3:1234"},
+		&Device{"aaaaaaaa", "127.0.0.1:1234", true},
+		&Device{"bbbbbbbb", "127.0.0.2:1235", true},
+		&Device{"cccccccc", "127.0.0.3:1236", true},
 
 		&FileInfo{
 			DeviceID: "aaaaaaaa",

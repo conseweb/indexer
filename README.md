@@ -2,10 +2,13 @@
 
 `go run cli/main.go`
 
+### 获取设备列表
+Get 	"/indexer/devices"
+
 ### 获取设备上的所有文件
 Get 	"/indexer/devices/:device_id"
 
-### 使设备上线可用
+### 使设备上线可用，body如下json，下同
 Post 	"/indexer/devices/:device_id/online"
 
 ### 使设备下线
@@ -29,34 +32,14 @@ Delete 	"/indexer/files/:file_id"
 	{
 		"id":"aaaaaaaa",
 		"address":"127.0.0.1:1234"
-	
 	},
-	{
-		"id":"bbbbbbbb",
-		"address":"127.0.0.2:1234"
-		},
-	{
-		"id":"cccccccc",
-		"address":"127.0.0.3:1234"
-	},
+
 	{
 		"id":0,
 		"device_id":"aaaaaaaa",
 		"path":"/a",
-		"created":"0001-01-01T00:00:00Z",
-		"updated":"0001-01-01T00:00:00Z"
-	},
-	{
-		"id":0,
-		"device_id":"aaaaaaaa",
-		"path":"/b",
-		"created":"0001-01-01T00:00:00Z",
-		"updated":"0001-01-01T00:00:00Z"
-	},
-	{
-		"id":0,
-		"device_id":"aaaaaaaa",
-		"path":"/c",
+		“size":1234,
+		"has":"fffff",
 		"created":"0001-01-01T00:00:00Z",
 		"updated":"0001-01-01T00:00:00Z"
 	}
